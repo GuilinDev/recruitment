@@ -1,12 +1,13 @@
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import User
 
 # Create your models here.
 JobTypes = [
     (0, "技术类"),
-    (0, "产品类"),
-    (0, "运营类"),
-    (0, "设计类")
+    (1, "产品类"),
+    (2, "运营类"),
+    (3, "设计类")
 ]
 
 Cities = [
@@ -21,5 +22,5 @@ class Job(models.Model):
     job_responsibility = models.TextField(max_length=1024, verbose_name="职位职责")
     job_requirement = models.TextField(blank=False, max_length=1024, verbose_name="职位要求")
     creator = models.ForeignKey(User, verbose_name="创建人", null=True, on_delete=models.SET_NULL)
-    created_date = models.DateTimeField(verbose_name="创建日期")
-    modified_date = models.DateTimeField(verbose_name="修改日期")
+    created_date = models.DateTimeField(verbose_name="创建日期", default=datetime.now)
+    modified_date = models.DateTimeField(verbose_name="修改日期", default=datetime.now)
